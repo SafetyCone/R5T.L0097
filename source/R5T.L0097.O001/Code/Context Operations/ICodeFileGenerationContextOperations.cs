@@ -12,6 +12,11 @@ namespace R5T.L0097.O001
     [ContextOperationsMarker]
     public partial interface ICodeFileGenerationContextOperations : IContextOperationsMarker
     {
+#pragma warning disable IDE1006 // Naming Styles
+        public Implementations.ICodeFileGenerationContextOperations _Implementations => Implementations.CodeFileGenerationContextOperations.Instance;
+#pragma warning restore IDE1006 // Naming Styles
+
+
         /// <summary>
         /// <inheritdoc cref="F0083.ICodeFileGenerationOperations.Create_ProgramFile_ForConsole(string, string)"/>
         /// <para><inheritdoc cref="Z0067.IProjectDirectoryPathRelativePaths.Program_cs" path="/descendant::value"/></para>
@@ -28,9 +33,24 @@ namespace R5T.L0097.O001
                     context.ProjectFilePath,
                     Instances.ProjectDirectoryPathRelativePaths.Program_cs);
 
-                return Instances.CodeFileGenerationOperations.Create_ProgramFile_ForConsole(
-                    codeFilePath,
-                    context.NamespaceName);
+                var childContext = new CodeFileContext
+                {
+                    FilePath = codeFilePath,
+                    NamespaceName = context.NamespaceName,
+                };
+
+                return Instances.ContextOperator.In_Context(
+                    childContext,
+                    //_Implementations.Create_ProgramFile_ForConsole_UsingRazorComponents<CodeFileContext>(
+                    //    out _
+                    //)
+                    //_Implementations.Create_ProgramFile_ForConsole_UsingRoslyn<CodeFileContext>(
+                    //    out _
+                    //)
+                    _Implementations.Create_ProgramFile_ForConsole_UsingTextTemplating<CodeFileContext>(
+                        out _
+                    )
+                );
             };
         }
     }

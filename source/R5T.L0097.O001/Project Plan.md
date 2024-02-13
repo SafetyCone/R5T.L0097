@@ -1,5 +1,5 @@
 # R5T.L0097.O001
-Catch-all library for code file generation context operations.
+Catch-all library for code file generation operations on {TContext : IHasProjectFilePath, IHasNamespaceName} unspecified context types.
 
 Includes:
 

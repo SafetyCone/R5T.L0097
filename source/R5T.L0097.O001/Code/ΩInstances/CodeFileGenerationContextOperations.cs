@@ -17,3 +17,21 @@ namespace R5T.L0097.O001
         #endregion
     }
 }
+
+
+namespace R5T.L0097.O001.Implementations
+{
+    public class CodeFileGenerationContextOperations : ICodeFileGenerationContextOperations
+    {
+        #region Infrastructure
+
+        public static ICodeFileGenerationContextOperations Instance { get; } = new CodeFileGenerationContextOperations();
+
+
+        private CodeFileGenerationContextOperations()
+        {
+        }
+
+        #endregion
+    }
+}
