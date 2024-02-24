@@ -5,6 +5,7 @@ using R5T.L0091.T000;
 using R5T.L0092.T001;
 using R5T.L0093.T000;
 using R5T.L0096.T000;
+using R5T.T0221;
 using R5T.T0241;
 
 
@@ -54,6 +55,22 @@ namespace R5T.L0097.O002
                 return Instances.CodeFileGenerator.Generate_ProgramFile(
                     context.FilePath,
                     context.NamespaceName);
+            };
+        }
+
+        public Func<TContext, Task> Create_ProjectPlanFile<TContext>(
+            (IsSet<IHasFilePath>, IsSet<IHasProjectName>, IsSet<IHasProjectDescription>) requiredProperties,
+            out IChecked<IFileExists> projectPlanFileExists)
+            where TContext : IHasFilePath, IHasProjectName, IHasProjectDescription
+        {
+            projectPlanFileExists = Checked.Check<IFileExists>();
+
+            return context =>
+            {
+                return Instances.CodeFileGenerator.Generate_ProjectPlanFile(
+                    context.FilePath,
+                    context.ProjectName,
+                    context.ProjectDescription);
             };
         }
     }

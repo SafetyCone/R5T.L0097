@@ -46,5 +46,19 @@ namespace R5T.L0097.F002
                 codeFilePath,
                 codeFileContent);
         }
+
+        public Task Generate_ProjectPlanFile(
+            string codeFilePath,
+            string projectName,
+            string projectDescription)
+        {
+            var codeFileContent = Instances.CodeFileContentGenerator.Generate_ProjectPlanFileContent(
+                projectName,
+                projectDescription);
+
+            return Instances.FileOperator.Write_Text(
+                codeFilePath,
+                codeFileContent);
+        }
     }
 }

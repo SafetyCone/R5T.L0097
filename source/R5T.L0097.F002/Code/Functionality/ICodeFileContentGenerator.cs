@@ -73,5 +73,18 @@ namespace {namespaceName}
 
             return output;
         }
+
+        public string Generate_ProjectPlanFileContent(
+            string projectName,
+            string projectDescription)
+        {
+            var output =
+$@"
+# {projectName}
+{projectDescription}
+".Trim();
+
+            return output;
+        }
     }
 }

@@ -3,6 +3,7 @@ Catch-all library for code file generation operations on {TContext : IHasProject
 
 Includes:
 
+* Text-templating. (R5T.L0097.O002)
 * Razor component-based code file generation. (R5T.F0083)
 * Roslyn-based code file generation.
 

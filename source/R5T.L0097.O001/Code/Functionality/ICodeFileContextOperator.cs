@@ -12,12 +12,13 @@ using R5T.T0221;
 namespace R5T.L0097.O001
 {
     [FunctionalityMarker]
-    public partial interface ICodeFileContextOperator : IFunctionalityMarker
+    public partial interface ICodeFileContextOperator : IFunctionalityMarker,
+        L0073.O004.ICodeFileContextOperator
     {
         public Task In_CodeFileContext(
             string codeFilePath,
             string namespaceName,
-            out (IsSet<IHasFilePath>, IsSet<IHasNamespaceName>) propertiesSet,
+            out (IsSet<IHasFilePath> FilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesSet,
             IEnumerable<Func<CodeFileContext, Task>> operations)
         {
             var context = new CodeFileContext
@@ -34,7 +35,7 @@ namespace R5T.L0097.O001
         public Task In_CodeFileContext(
             string codeFilePath,
             string namespaceName,
-            out (IsSet<IHasFilePath>, IsSet<IHasNamespaceName>) propertiesSet,
+            out (IsSet<IHasFilePath> FilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesSet,
             params Func<CodeFileContext, Task>[] operations)
         {
             return this.In_CodeFileContext(
