@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
 
+using R5T.L0066.Contexts;
 using R5T.L0091.T000;
 using R5T.L0092.T001;
 using R5T.L0093.T000;
 using R5T.L0096.T000;
+using R5T.T0180;
 using R5T.T0221;
 using R5T.T0241;
 
@@ -18,6 +20,78 @@ namespace R5T.L0097.O001
         public Implementations.ICodeFileGenerationContextOperations _Implementations => Implementations.CodeFileGenerationContextOperations.Instance;
 #pragma warning restore IDE1006 // Naming Styles
 
+
+        public Func<TContext, Task> Create_AppRazorComponentFile_ForStaticHtmlWebApplication<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedProgramFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.App_razor,
+                _Implementations._UsingTextTemplating.Create_AppRazorComponentFile_ForStaticHtmlWebApplication<CodeFileContext>,
+                propertiesRequired,
+                out checkedProgramFileExists);
+        }
+
+        public Func<TContext, Task> Create_AppSettingsJsonFile<TContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.AppSettings_json,
+                _Implementations._UsingTextTemplating.Create_AppSettingsJsonFile<CodeFileContext>,
+                projectFilePathSet,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_Component1File<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedProgramFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Component1_razor,
+                _Implementations._UsingTextTemplating.Create_Component1File<CodeFileContext>,
+                propertiesRequired,
+                out checkedProgramFileExists);
+        }
+
+        public Func<TContext, Task> Create_DevelopmentAppSettingsJsonFile<TContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.AppSettings_Development_json,
+                _Implementations._UsingTextTemplating.Create_DevelopmentAppSettingsJsonFile<CodeFileContext>,
+                projectFilePathSet,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_HostRazorPageFile_ForStaticHtmlWebApplication<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedProgramFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths._Host_cshtml,
+                _Implementations._UsingTextTemplating.Create_HostRazorPageFile_ForStaticHtmlWebApplication<CodeFileContext>,
+                propertiesRequired,
+                out checkedProgramFileExists);
+        }
+
+        public Func<TContext, Task> Create_IndexRazorComponentFile_ForStaticHtmlWebApplication<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Index_razor,
+                _Implementations._UsingTextTemplating.Create_IndexRazorComponentFile_ForStaticHtmlWebApplication<CodeFileContext>,
+                propertiesRequired,
+                out checkeIndexFileExists);
+        }
 
         public Func<TContext, Task> Create_InstancesFile<TContext>(
             (IsSet<IHasProjectFilePath>, IsSet<IHasNamespaceName>) requiredProperties,
@@ -70,6 +144,95 @@ namespace R5T.L0097.O001
                     )
                 );
             };
+        }
+
+        public Func<TContext, Task> Create_Class1File<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedClass1FileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Class1_cs,
+                _Implementations._UsingTextTemplating.Create_Class1File<CodeFileContext>,
+                propertiesRequired,
+                out checkedClass1FileExists);
+        }
+
+        public delegate Func<CodeFileContext, Task> CodeFileGenerator_CodeFileOnly(
+            IsSet<IHasFilePath> codeFilePathSet,
+            out IChecked<IFileExists> checkedCodeFileExists);
+
+        public Func<TContext, Task> Create_CodeFile<TContext>(
+            string projectDirectoryRelativeFilePath,
+            CodeFileGenerator_CodeFileOnly codeFileGenerator,
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> checkedCodeFileExists)
+            where TContext : IHasProjectFilePath
+        {
+            var contextSet = Instances.ContextOperator.Get_ContextSetSpecifier<CodeFileContext, TContext>();
+
+            return Instances.ContextOperations.In_ContextSet_A_BA<CodeFileContext, TContext>(
+                Instances.ContextOperations.Construct_Context_B_BA<CodeFileContext, TContext>(
+                    // Do nothing.
+                ),
+                this.Set_CodeFilePath<CodeFileContext, TContext>(
+                    projectDirectoryRelativeFilePath,
+                    projectFilePathSet,
+                    out var codeFilePathSet),
+                codeFileGenerator(codeFilePathSet,
+                    out checkedCodeFileExists).In(contextSet)
+            );
+        }
+
+        public delegate Func<CodeFileContext, Task> CodeFileGenerator(
+            (IsSet<IHasFilePath> CodeFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedCodeFileExists);
+
+        public Func<TContext, Task> Create_CodeFile<TContext>(
+            string projectDirectoryRelativeFilePath,
+            CodeFileGenerator codeFileGenerator,
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedCodeFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            var contextSet = Instances.ContextOperator.Get_ContextSetSpecifier<CodeFileContext, TContext>();
+
+            return Instances.ContextOperations.In_ContextSet_A_BA<CodeFileContext, TContext>(
+                Instances.ContextOperations.Construct_Context_B_BA<CodeFileContext, TContext>(
+                    Instances.ProjectContextOperations.Set_NamespaceName<CodeFileContext, TContext>(propertiesRequired.NamespaceNameSet,
+                        out var namespaceNameSet)
+                ),
+                this.Set_CodeFilePath<CodeFileContext, TContext>(
+                    projectDirectoryRelativeFilePath,
+                    propertiesRequired.ProjectFilePathSet,
+                    out var codeFilePathSet),
+                codeFileGenerator((codeFilePathSet, propertiesRequired.NamespaceNameSet),
+                    out checkedCodeFileExists).In(contextSet)
+            );
+        }
+
+        public Func<TContext, Task> Create_ProgramFile_ForStaticHtmlWebApplication<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedProgramFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Program_cs,
+                _Implementations._UsingTextTemplating.Create_ProgramFile_ForStaticHtmlWebApplication<CodeFileContext>,
+                propertiesRequired,
+                out checkedProgramFileExists);
+        }
+
+        public Func<TContext, Task> Create_LaunchSettingsJsonFile<TContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.LaunchSettings_json,
+                _Implementations._UsingTextTemplating.Create_LaunchSettingsJsonFile<CodeFileContext>,
+                projectFilePathSet,
+                out checkeIndexFileExists);
         }
 
         /// <summary>
@@ -214,6 +377,42 @@ namespace R5T.L0097.O001
                         out _
                     )
                 );
+            };
+        }
+
+        public Func<TContext, Task> Create_WwwrootDirectory<TContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IDirectoryExists> checkedWwwrootDirectoryExists)
+            where TContext : IHasProjectFilePath
+        {
+            checkedWwwrootDirectoryExists = Checked.Check<IDirectoryExists>();
+
+            return context =>
+            {
+                var wwwrootDirectoryPath = Instances.ProjectPathsOperator.Get_Path_ForProjectDirectoryRelativePath(
+                    context.ProjectFilePath,
+                    @"wwwroot\");
+
+                Instances.FileSystemOperator.Create_Directory_OkIfAlreadyExists(wwwrootDirectoryPath);
+
+                return Task.CompletedTask;
+            };
+        }
+
+        public Func<TContext, TProjectContext, Task> Set_CodeFilePath<TContext, TProjectContext>(
+            string projectDirectoryRelativePath,
+            IsSet<IHasProjectFilePath> projectFilePath_ProjectContextPropertiesSet,
+            out IsSet<IHasFilePath> codeFilePathSet)
+            where TContext : IWithFilePath
+            where TProjectContext : IHasProjectFilePath
+        {
+            return (context, projectContext) =>
+            {
+                context.FilePath = Instances.ProjectPathsOperator.Get_Path_ForProjectDirectoryRelativePath(
+                    projectContext.ProjectFilePath,
+                    projectDirectoryRelativePath);
+
+                return Task.CompletedTask;
             };
         }
     }
