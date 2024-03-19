@@ -124,6 +124,22 @@ namespace R5T.L0097.O002
             };
         }
 
+        public Func<TContext, Task> Create_IndexRazorComponentFile_ForStaticHtmlWebApplication_WithLibrary<TContext>(
+            (IsSet<IHasFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
+            out IChecked<IFileExists> programFileExists)
+            where TContext : IHasFilePath, IHasNamespaceName
+        {
+            programFileExists = Checked.Check<IFileExists>();
+
+            return context =>
+            {
+                return Instances.CodeFileGenerator.Generate_File(
+                    context.FilePath,
+                    Instances.CodeFileContentGenerator.Generate_IndexRazorComponentFileContent_WithLibrary(
+                        context.NamespaceName));
+            };
+        }
+
         public Func<TContext, Task> Create_InstancesFile<TContext>(
             out IChecked<IFileExists> instancesFileExists)
             where TContext : IHasFilePath, IHasNamespaceName

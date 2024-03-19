@@ -158,6 +158,34 @@ $@"
 ".Trim();
         }
 
+        public Func<string> Generate_IndexRazorComponentFileContent_WithLibrary(
+            string namespaceName)
+        {
+            return () =>
+$@"
+@page ""/""
+
+@namespace {namespaceName}
+
+<html>
+    <head>
+        <meta charset=""utf-8"" />
+
+        <title>Index Page</title>
+    </head>
+    <body>
+        <h3>Index</h3>
+
+        <Component1 />
+    </body>
+</html>
+
+@code {{
+
+}}
+".Trim();
+        }
+
         public string Generate_InstancesFileContent(
             string namespaceName)
         {

@@ -93,6 +93,18 @@ namespace R5T.L0097.O001
                 out checkeIndexFileExists);
         }
 
+        public Func<TContext, Task> Create_IndexRazorComponentFile_ForStaticHtmlWebApplication_WithLibrary<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Index_razor,
+                _Implementations._UsingTextTemplating.Create_IndexRazorComponentFile_ForStaticHtmlWebApplication_WithLibrary<CodeFileContext>,
+                propertiesRequired,
+                out checkeIndexFileExists);
+        }
+
         public Func<TContext, Task> Create_InstancesFile<TContext>(
             (IsSet<IHasProjectFilePath>, IsSet<IHasNamespaceName>) requiredProperties,
             out IChecked<IFileExists> checkedInstancesFileExists
