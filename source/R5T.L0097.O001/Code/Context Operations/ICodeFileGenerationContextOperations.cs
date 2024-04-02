@@ -21,6 +21,174 @@ namespace R5T.L0097.O001
 #pragma warning restore IDE1006 // Naming Styles
 
 
+        public Func<TContext, Task> Create_ProgramFile_ForBlazorServer<TContext>(
+            (IsSet<IHasProjectFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Program_cs,
+                _Implementations._UsingTextTemplating.Create_ProgramFile_ForBlazorServer<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_ErrorPageRazorComponent_ForBlazorClient<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Error_razor_Page,
+                _Implementations._UsingTextTemplating.Create_ErrorPageComponent_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_TailwindConfigJs<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.tailwind_config_js,
+                _Implementations._UsingTextTemplating.Create_TailwindConfigJs<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_TailwindConfigJs_ForBlog<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.tailwind_config_js,
+                _Implementations._UsingTextTemplating.Create_TailwindConfigJs_ForBlog<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_TailwindSourceCss<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.tailwind_css,
+                _Implementations._UsingTextTemplating.Create_TailwindSourceCss<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_ProgramFile_ForBlazorClient<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Program_cs,
+                _Implementations._UsingTextTemplating.Create_ProgramFile_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_ImportsComponent_ForBlazorClient<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths._Imports_razor_ForComponents,
+                _Implementations._UsingTextTemplating.Create_ImportsComponent_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_ImportsComponent_ForBlazorLibrary<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths._Imports_razor_ForComponents,
+                _Implementations._UsingTextTemplating.Create_ImportsComponent_ForBlazorLibrary<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_RoutesComponent_ForBlazorClient<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Routes_razor,
+                _Implementations._UsingTextTemplating.Create_RoutesComponent_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_MainLayoutComponent_ForBlazorClient<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.MainLayout_razor,
+                _Implementations._UsingTextTemplating.Create_MainLayoutComponent_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_HomeRazorComponent_ForBlazorClient<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Home_razor,
+                _Implementations._UsingTextTemplating.Create_HomeRazorComponent_ForBlazorClient<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_HomeRazorComponent_ForBlazorClient_WithComponentLibrary<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Home_razor,
+                _Implementations._UsingTextTemplating.Create_HomeRazorComponent_ForBlazorClient_WithComponentLibrary<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_TailwindContentPathsJsonFile_Default<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.tailwind_contentpaths_json,
+                _Implementations._UsingTextTemplating.Create_TailwindContentPathsJsonFile_Default<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
+        public Func<TContext, Task> Create_TailwindContentPathsJsonFile_ForBlog<TContext>(
+            IsSet<IHasProjectFilePath> propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.tailwind_contentpaths_json,
+                _Implementations._UsingTextTemplating.Create_TailwindContentPathsJsonFile_ForBlog<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
         public Func<TContext, Task> Create_AppRazorComponentFile_ForStaticHtmlWebApplication<TContext>(
             (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
             out IChecked<IFileExists> checkedProgramFileExists)
@@ -69,6 +237,47 @@ namespace R5T.L0097.O001
                 out checkeIndexFileExists);
         }
 
+        public Func<TContext, Task> Create_Form1_cs<TContext>(
+            (IsSet<IHasProjectFilePath> projectFilePathSet, IsSet<IHasNamespaceName> namespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext :
+            IHasProjectFilePath,
+            IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Form1_cs,
+                _Implementations._UsingTextTemplating.Create_Form1_cs<CodeFileContext>,
+                propertiesRequired,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_Form1_Designer_cs<TContext>(
+            (IsSet<IHasProjectFilePath> projectFilePathSet, IsSet<IHasNamespaceName> namespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext :
+            IHasProjectFilePath,
+            IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Form1_Designer_cs,
+                _Implementations._UsingTextTemplating.Create_Form1_Designer_cs<CodeFileContext>,
+                propertiesRequired,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_Form1_resx<TContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext :
+            IHasProjectFilePath
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Form1_resx,
+                _Implementations._UsingTextTemplating.Create_Form1_resx<CodeFileContext>,
+                projectFilePathSet,
+                out checkeIndexFileExists);
+        }
+
         public Func<TContext, Task> Create_HostRazorPageFile_ForStaticHtmlWebApplication<TContext>(
             (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
             out IChecked<IFileExists> checkedProgramFileExists)
@@ -89,6 +298,18 @@ namespace R5T.L0097.O001
             return this.Create_CodeFile<TContext>(
                 Instances.ProjectDirectoryPathRelativePaths.Index_razor,
                 _Implementations._UsingTextTemplating.Create_IndexRazorComponentFile_ForStaticHtmlWebApplication<CodeFileContext>,
+                propertiesRequired,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_IndexRazorComponentFile_ForBlogStaticHtmlWebApplication<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Index_razor,
+                _Implementations._UsingTextTemplating.Create_IndexRazorComponentFile_ForBlogStaticHtmlWebApplication<CodeFileContext>,
                 propertiesRequired,
                 out checkeIndexFileExists);
         }
@@ -170,6 +391,18 @@ namespace R5T.L0097.O001
                 out checkedClass1FileExists);
         }
 
+        public Func<TContext, Task> Create_Class1File_ForWindowsFormsLibrary<TContext>(
+            (IsSet<IHasProjectFilePath> ProjectFilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) propertiesRequired,
+            out IChecked<IFileExists> checkedClass1FileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Class1_cs,
+                _Implementations._UsingTextTemplating.Create_Class1File_ForWindowsFormsLibrary<CodeFileContext>,
+                propertiesRequired,
+                out checkedClass1FileExists);
+        }
+
         public delegate Func<CodeFileContext, Task> CodeFileGenerator_CodeFileOnly(
             IsSet<IHasFilePath> codeFilePathSet,
             out IChecked<IFileExists> checkedCodeFileExists);
@@ -244,6 +477,20 @@ namespace R5T.L0097.O001
                 Instances.ProjectDirectoryPathRelativePaths.LaunchSettings_json,
                 _Implementations._UsingTextTemplating.Create_LaunchSettingsJsonFile<CodeFileContext>,
                 projectFilePathSet,
+                out checkeIndexFileExists);
+        }
+
+        public Func<TContext, Task> Create_ProgramFile_ForWindowsFormsApplication<TContext>(
+            (IsSet<IHasProjectFilePath> projectFilePathSet, IsSet<IHasNamespaceName>) contextPropertiesRequired,
+            out IChecked<IFileExists> checkeIndexFileExists)
+            where TContext :
+            IHasProjectFilePath,
+            IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.Program_cs,
+                _Implementations._UsingTextTemplating.Create_ProgramFile_ForWindowsFormsApplication<CodeFileContext>,
+                contextPropertiesRequired,
                 out checkeIndexFileExists);
         }
 
