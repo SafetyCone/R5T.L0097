@@ -14,6 +14,22 @@ namespace R5T.L0097.O002
     [ContextOperationsMarker]
     public partial interface ICodeFileGenerationContextOperations : IContextOperationsMarker
     {
+        public Func<TContext, Task> Create_StringsController<TContext>(
+            (IsSet<IHasFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasFilePath, IHasNamespaceName
+        {
+            fileExists = Checked.Check<IFileExists>();
+
+            return context =>
+            {
+                return Instances.CodeFileGenerator.Generate_File(
+                    context.FilePath,
+                    Instances.CodeFileContentGenerator.Generate_StringsControllerFileContent(
+                        context.NamespaceName));
+            };
+        }
+
         public Func<TContext, Task> Create_ProgramFile_ForBlazorServer<TContext>(
             (IsSet<IHasFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
             out IChecked<IFileExists> fileExists)

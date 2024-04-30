@@ -21,6 +21,18 @@ namespace R5T.L0097.O001
 #pragma warning restore IDE1006 // Naming Styles
 
 
+        public Func<TContext, Task> Create_StringsController<TContext>(
+            (IsSet<IHasProjectFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
+            out IChecked<IFileExists> fileExists)
+            where TContext : IHasProjectFilePath, IHasNamespaceName
+        {
+            return this.Create_CodeFile<TContext>(
+                Instances.ProjectDirectoryPathRelativePaths.StringsController_cs,
+                _Implementations._UsingTextTemplating.Create_StringsController<CodeFileContext>,
+                propertiesRequired,
+                out fileExists);
+        }
+
         public Func<TContext, Task> Create_ProgramFile_ForBlazorServer<TContext>(
             (IsSet<IHasProjectFilePath>, IsSet<IHasNamespaceName>) propertiesRequired,
             out IChecked<IFileExists> fileExists)

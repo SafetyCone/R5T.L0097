@@ -35,6 +35,8 @@ namespace {namespaceName}
             builder.Services.AddRazorComponents()
                 .AddInteractiveWebAssemblyComponents();
 
+            builder.Services.AddControllers();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -57,6 +59,8 @@ namespace {namespaceName}
             app.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddAdditionalAssemblies(typeof(Client.Components._Imports).Assembly);
+
+            app.MapControllers();
 
             app.Run();
         }}
@@ -109,11 +113,11 @@ $@"
     <base href=""/"" />
     <link rel=""stylesheet"" href=""/css-out/tailwind.css"" />
     <link rel=""stylesheet"" href=""{projectName}.styles.css"" />
-    <HeadOutlet @rendermode=""InteractiveWebAssembly"" />
+    <HeadOutlet @rendermode=""new InteractiveWebAssemblyRenderMode(prerender: false)"" />
 </head>
 
 <body>
-    <Routes @rendermode=""InteractiveWebAssembly"" />
+    <Routes @rendermode=""new InteractiveWebAssemblyRenderMode(prerender: false)"" />
     <script src=""_framework/blazor.web.js""></script>
 </body>
 
@@ -247,6 +251,43 @@ $@"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+".Trim();
+        }
+
+        public Func<string> Generate_StringsControllerFileContent(
+            string namespaceName)
+        {
+            return () =>
+$@"
+using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+
+
+namespace {namespaceName}.Controllers
+{{
+    [ApiController]
+    [Route(""/api/[controller]"")]
+    public class StringsController : ControllerBase
+    {{
+        [HttpGet(""values"")]
+        public async Task<string[]> Get()
+        {{
+            // Simulate a long operation.
+            await Task.Delay(3000);
+
+            var output = new string[]
+            {{
+            ""A"",
+            ""B"",
+            ""C""
+            }};
+
+            return output;
+        }}
+    }}
+}}
 ".Trim();
         }
 
@@ -948,18 +989,21 @@ $@"
       ""dotnetRunMessages"": true,
       ""launchBrowser"": true,
       ""applicationUrl"": ""http://localhost:5137"",
+      ""inspectUri"": ""{{wsProtocol}}://{{url.hostname}}:{{url.port}}/_framework/debug/ws-proxy?browser={{browserInspectUri}}"",
       ""environmentVariables"": {{
         ""ASPNETCORE_ENVIRONMENT"": ""Development""
       }}
     }},
     ""https"": {{
+      ""launchUrl"": """",
+      ""environmentVariables"": {{
+        ""ASPNETCORE_ENVIRONMENT"": ""Development""
+      }},
       ""commandName"": ""Project"",
       ""dotnetRunMessages"": true,
       ""launchBrowser"": true,
       ""applicationUrl"": ""https://localhost:7020;http://localhost:5137"",
-      ""environmentVariables"": {{
-        ""ASPNETCORE_ENVIRONMENT"": ""Development""
-      }}
+      ""inspectUri"": ""{{wsProtocol}}://{{url.hostname}}:{{url.port}}/_framework/debug/ws-proxy?browser={{browserInspectUri}}""
     }}
   }}
 }}
